@@ -74,6 +74,14 @@ async function run() {
       res.send(post);
     });
 
+    app.get("/my-post/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { userEmail: email };
+      const post = collectionBuyRequest.find(query);
+      const result = await post.toArray();
+      res.send(result);
+    });
+
     app.put("/makeapproved/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: ObjectId(id) };
