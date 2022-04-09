@@ -21,15 +21,11 @@ async function run() {
 
     app.post("/addnewpost", async (req, res) => {
       const result = await collectionPostData.insertOne(req.body);
-      console.log("Hitting the database");
-      console.log(req.body);
       res.send(result);
     });
 
     app.post("/buy", async (req, res) => {
       const result = await collectionBuyRequest.insertOne(req.body);
-      console.log("Hitting the database");
-      console.log(req.body);
       res.send(result);
     });
 
@@ -47,9 +43,11 @@ async function run() {
 
     app.get("/post/:id", async (req, res) => {
       const id = req.params.id;
-      const query = { _id: ObjectId(id) };
-      const post = await collectionPostData.findOne(query);
-      res.send(post);
+      if (id !== "undefined") {
+        const query = { _id: new ObjectId(id) };
+        const post = await collectionPostData.findOne(query);
+        res.send(post);
+      }
     });
 
     app.get("/my-post/:email", async (req, res) => {
