@@ -10,25 +10,6 @@ app.use(express.json());
 const port = process.env.PORT || 5000;
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.npegz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-// const client = new MongoClient(uri, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   serverApi: ServerApiVersion.v1,
-// });
-
-// client.connect((err) => {
-//   const collection = client
-//     .db("booknow_project_sunshine")
-//     .collection("usersData");
-//   // perform actions on the collection object
-//   app.post("/addnewpost", async (req, res) => {
-//     const result = collection.insertOne(req.body);
-//     console.log("Hitting the database");
-//     console.log(req.body);
-//     res.send(result);
-//   });
-//   client.close();
-// });
 
 const client = new MongoClient(uri);
 async function run() {
@@ -106,15 +87,6 @@ async function run() {
   }
 }
 run().catch(console.dir);
-
-// client.connect((err) => {
-//   const collection = client
-//     .db("booknow_project_sunshine")
-//     .collection("usersData");
-//   // perform actions on the collection object
-//   console.log("Hitting the database");
-//   client.close();
-// });
 
 app.get("/", (req, res) => {
   res.send("hello from node");
