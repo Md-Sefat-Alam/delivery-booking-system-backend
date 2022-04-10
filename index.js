@@ -40,6 +40,28 @@ async function run() {
       const allpost = await cursor.toArray();
       res.send(allpost);
     });
+    app.get("/mypost/:email", async (req, res) => {
+      const email = req.params.email;
+      const cursor = collectionPostData.find({ woner_email: email });
+      const allpost = await cursor.toArray();
+      res.send(allpost);
+    });
+    // for just food
+    app.get("/post/food", async (req, res) => {
+      const cursor = collectionPostData.find({ pType: "food" });
+      const allpost = await cursor.toArray();
+      res.send(allpost);
+    });
+    app.get("/post/furniture", async (req, res) => {
+      const cursor = collectionPostData.find({ pType: "furniture" });
+      const allpost = await cursor.toArray();
+      res.send(allpost);
+    });
+    app.get("/post/mobile-ict-equipment", async (req, res) => {
+      const cursor = collectionPostData.find({ pType: "mobile" });
+      const allpost = await cursor.toArray();
+      res.send(allpost);
+    });
 
     app.get("/post/:id", async (req, res) => {
       const id = req.params.id;
